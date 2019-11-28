@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MyExcel.Test
 {
@@ -15,7 +15,7 @@ namespace MyExcel.Test
             const double expected = 30;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -31,7 +31,7 @@ namespace MyExcel.Test
             const double expected = -10;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -47,7 +47,7 @@ namespace MyExcel.Test
             const double expected = 200;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -63,7 +63,7 @@ namespace MyExcel.Test
             const double expected = 1.5;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -78,7 +78,7 @@ namespace MyExcel.Test
             const double expected = 10;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -93,7 +93,7 @@ namespace MyExcel.Test
             const double expected = -10;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -110,7 +110,7 @@ namespace MyExcel.Test
             const double expected = 27;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -123,7 +123,8 @@ namespace MyExcel.Test
             const double x = 3.5;
             const double y = 2.2;
 
-            string expr = $"={x} ^ {y}";
+            string expr = $"={x.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)} " +
+                          $"^ {y.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)}";
             const double expected = 15.7380056747621;
 
             // act
@@ -144,7 +145,7 @@ namespace MyExcel.Test
             const double expected = 7;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -157,7 +158,8 @@ namespace MyExcel.Test
             const double x = 7.7778;
             const double y = 7.7777;
 
-            string expr = $"=max({x}, {y})";
+            string expr = $"=max({x.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture)}" +
+                          $", {y.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture)})";
             const double expected = 7.7778;
 
             // act
@@ -178,7 +180,7 @@ namespace MyExcel.Test
             const string expected = "InvalidOperation";
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -192,7 +194,7 @@ namespace MyExcel.Test
             const string expected = "DivByZero";
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -203,11 +205,12 @@ namespace MyExcel.Test
         {
             // arrange
             const double x = 2.55215211245215;
-            string expr = $"={x} / 0";
+            string expr = $"={x.ToString("0.00000000000000", System.Globalization.CultureInfo.InvariantCulture)} " +
+                          "/ 0";
             const string expected = "DivByZero";
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -221,7 +224,7 @@ namespace MyExcel.Test
             const string expected = "InvalidOperation";
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -235,7 +238,7 @@ namespace MyExcel.Test
             const double expected = 10;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -249,7 +252,7 @@ namespace MyExcel.Test
             const double expected = -10;
 
             // act
-            object result = Calculate(expr);
+            var result = Calculate(expr);
 
             // assert
             Assert.AreEqual(expected, result);
@@ -257,7 +260,7 @@ namespace MyExcel.Test
 
         private static object Calculate(string expr)
         {
-            MathCell testCell = new MathCell(expr);
+            var testCell = new MathCell(expr);
             testCell.EvaluateFormula();
 
             return testCell.Value;
