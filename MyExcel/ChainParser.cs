@@ -1,4 +1,4 @@
-﻿using org.mariuszgromada.math.mxparser;
+using org.mariuszgromada.math.mxparser;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -88,7 +88,7 @@ namespace MyExcel
                                        formula.Contains('R') && !formula.Contains('C') || // Contains R without C
                                        formula.Contains('C') && !formula.Contains('R') || // Contains C without R
                                        formula.Contains('r') && formula.Contains('c') ||
-                                       formula.IndexOf('C') <= formula.IndexOf('R'); //Reference given in CiRi notation
+                                       formula.IndexOf('C') < formula.IndexOf('R'); //Reference given in CiRi notation
             return hasInvalidRefFormat;
         }
 
